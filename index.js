@@ -1,9 +1,13 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const knex = require('knex');
 
 // const authRouter = require('../auth/auth-router.js');
 // const usersRouter = require('../users/users-router.js');
+// const secrets = require('../secret/secret');
 
 const server = express();
 
