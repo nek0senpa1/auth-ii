@@ -71,7 +71,7 @@ widget.post('/login', (rec,rez) => {
                 tolkien,
             })
         } else {
-            res.status(402).json({message: 'Nah... that ain\'t you...'})
+            rez.status(402).json({message: 'Nah... that ain\'t you...'})
         }
     })
     .catch(err => {
@@ -85,15 +85,45 @@ function makeTolkien(object) {
     const payload = {
         subject: object.id,
         username: object.username,
-        iat: 525600
+        
     };
 
     const options = {
-        expiresIn: '5m',
+        expiresIn: '1d',
     };
 
     return jwt.sign(payload, secrets.shhhhh, options);
 
 }
+
+function badPanda(red, rez, nexto) {
+    var taken = red.headers.authorization;
+    //console.log(taken);
+    if(taken) {
+        jwt.verify(taken, secrets.shhhhh, function(problem, hacked) {
+            console.log(problem);
+            if (problem) {
+                rez.status(402).json('You shall not pass - Gandalf the API Wizard')
+            } else {
+                console.log( 'looks like we made it', hacked);
+                nexto();
+            }
+        })
+    } else {
+        rez.status(401).json('Bad Panda!  You aren\'t logged in yet...')
+    }
+}
+
+
+widget.get('/users', badPanda, (rec, rez) =>{
+
+    murderHobos.find()
+    .then(users => {
+      rez.json(users);
+    })
+    .catch(err => rez.send(err,'hmmmm... nope you took a wrong turn at Albequerqe'));
+    
+})
+
 
 module.exports = widget;
