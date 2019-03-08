@@ -9,7 +9,12 @@ export default class Login extends Component {
         password: ''
     }
 
+    
+
     render() {
+        const bob = localStorage.getItem('jwt');
+        const cat = <div>You AIN'T logged in</div>
+        const dog = <div>You ARE logged in!!</div>
         return(
             <div>
                 <h2>Login</h2>
@@ -38,6 +43,9 @@ export default class Login extends Component {
                     
                     <button type ='submit'>Login</button>
                 </form>
+                <div>
+                {bob ? dog : cat}
+                </div>
             </div>
         )
 

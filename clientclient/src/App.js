@@ -28,8 +28,20 @@ class App extends Component {
           </div>
         </header>
       </div>
+      
+      
     );
   }
+
+  logout = () => {
+    localStorage.removeItem('jwt');
+    this.props.history.push('/login');
+  }
+
 }
+
+
+
+
 
 export default withRouter (App);
