@@ -21,5 +21,4 @@
     "server": "nodemon index.js",
     "start": "node index.js"
   }
-
 }
