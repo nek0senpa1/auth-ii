@@ -9,11 +9,21 @@ class Users extends Component {
     }
 
     componentDidMount() {
+
+        const taken = localStorage.getItem('jwt');
+        
+        const badPanda = {
+            headers: {
+                Authorization: taken,
+            }
+        }
+
+
         axios
-        .get('http://localhost:5500/api/users')
+        .get('http://localhost:5500/api/users', badPanda)
         .then(res => {
             this.setState ({
-                userlist: res.data
+                userlist: res.data.users
             })
         })
         .catch(err =>{
@@ -27,7 +37,7 @@ class Users extends Component {
                 <h2>Here's Your User Friends</h2>
                 <div>
                     {this.state.userlist.map( stuff => {
-                        return <h4>{stuff}</h4>
+                        return <h4>{stuff.username}</h4>
                     })}
                 </div>
             </div>
