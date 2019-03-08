@@ -47,9 +47,8 @@ widget.post('/register', (rec, rez) => {
     murderHobos.add(nooby)
     .then(stuff => {
         if (stuff) {
-            let tolkien = generateTolkien(stuff)
-
-        rez.status(200).json({message: 'Nooby Registered:', token})
+           
+        rez.status(200).json({message: 'Nooby Registered:', stuff})
         }
     })
     .catch(err => {
@@ -75,7 +74,7 @@ widget.post('/login', (rec,rez) => {
         }
     })
     .catch(err => {
-        rez.status(500).json({err, message:'mmmmmm..... no.... No that is not right.'})
+        rez.status(501).json({err, message:'mmmmmm..... no.... No that is not right.'})
     })
 })
 
